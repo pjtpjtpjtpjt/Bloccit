@@ -1,5 +1,5 @@
 # Bloccit
-reddit clone
+reddit clone changed
 
  ## Bloccit: a Reddit replica to teach the fundamentals of web development and Rails.
  
