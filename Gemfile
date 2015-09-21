@@ -12,6 +12,8 @@ source 'https://rubygems.org'
  
  group :development do
    gem 'sqlite3'
+   gem 'pry-rails'
+   gem 'gist'
  end
  
  group :development, :test do
