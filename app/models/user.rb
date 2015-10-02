@@ -1,22 +1,23 @@
 class User < ActiveRecord::Base
     
     
-    before_save {
-      self.email = email.downcase,
+    before_save {self.email = email.downcase}
   
-       if self.name != nil
     
-        split_name = self.name.split
+    before_save {
+        if self.name != nil && self.name.include?(" ")
+    
+         split_name = self.name.split
         
-        name_temp = []
-        split_name.each do |namepart|
-        name_temp << namepart.capitalize 
-        end
-    
+         name_temp = []
+          split_name.each do |namepart|
+          name_temp << namepart.capitalize
+          end
+          
           self.name = name_temp.join(" ")
     
-       else
-       end
+        else
+        end
     }
 
 
