@@ -1,5 +1,15 @@
 include RandomData
  
+ 
+ 
+ 5.times do
+   user = User.create!(
+   name:     RandomData.random_name,
+   email:    RandomData.random_email,
+   password: RandomData.random_sentence
+   )
+ end
+ users = User.all
 
 
 15.times do
@@ -15,6 +25,7 @@ include RandomData
  50.times do
 
    Post.create!(
+     user:   users.sample,
      topic:  topics.sample,
      title:  RandomData.random_sentence,
      body:   RandomData.random_paragraph
@@ -64,8 +75,15 @@ include RandomData
  end
 
  
+ user = User.first
+ user.update_attributes!(
+   email: 'pjtpjtpjtpjt@yahoo.com', # replace this with your personal email
+   password: 'helloworld'
+ )
+ 
  
  puts "Seed finished"
+ puts "#{User.count} users created"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
  puts "#{Advertisement.count} adverts created"
