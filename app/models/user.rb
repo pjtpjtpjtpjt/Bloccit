@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
     has_many :posts
     
     before_save {self.email = email.downcase}
+    before_save { self.role ||= :member }
   
     
     before_save {
@@ -39,6 +40,8 @@ class User < ActiveRecord::Base
 
  
    has_secure_password
+   
+   enum role: [:member, :admin, :moderator]
     
     
 end

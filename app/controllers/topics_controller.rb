@@ -1,18 +1,18 @@
 class TopicsController < ApplicationController
+    before_action :require_sign_in, except: [:index, :show]
+    before_action :authorize_user, except: [:index, :show, :edit]
+    
+    
     def index
     @topics = Topic.all
     end
 
-def show
+    def show
     @topic = Topic.find(params[:id])
-end
+    end
 
 
-#   def new_sponsored_post
-#       redirect_to sponsored_posts
-#   end
-   
-   
+
    def new
      @topic = Topic.new
    end
@@ -27,6 +27,8 @@ end
        render :new
      end
    end
+   
+   
    
    def edit
      @topic = Topic.find(params[:id])
@@ -45,6 +47,7 @@ end
        render :edit
      end
    end
+   
    
    def destroy
      @topic = Topic.find(params[:id])
@@ -65,5 +68,17 @@ end
    def topic_params
      params.require(:topic).permit(:name, :description, :public)
    end
+   
+   
+   def authorize_user
+       
+     unless current_user.admin? || current_user.moderator?
+     
+      flash[:error] = "You must be an admin to do that."
+      redirect_to topics_path
+     end
+   end
+   
+   
 
 end
