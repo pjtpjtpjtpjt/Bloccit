@@ -1,0 +1,16 @@
+ <div class="media">
+   <div class="media-body">
+     <%= link_to post.title, [@topic, post] %>
+     <small>
+       submitted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %> <br>
+       <%= post.comments.count %> Posts
+     </small>
+     <% if user_is_authorized_for_post_del?(post) %>
+         <%= link_to "Delete",  [@topic, post], method: :delete, data: {confirm: "Are you sure?"} %>
+       <% end %>
+    
+   </div>
+ </div>
+ 
+ 
+ 

@@ -1,0 +1,13 @@
+ <div class="media">
+   <div class="media-body">
+   <%= link_to topic.name, topic %>
+    <small>
+       submitted <%= time_ago_in_words(topic.created_at) %> ago<br>
+       
+     </small>
+     <% if user_is_authorized_for_topic?(topic) %>
+         <%= link_to "Delete",  topic, method: :delete, data: {confirm: "Are you sure?"} %>
+       <% end %>
+    
+   </div>
+ </div>
