@@ -1,0 +1,11 @@
+<h4>Rating:
+        <% if ratable.rating %>
+          <div class="btn-xs btn-primary rating">
+            <%= ratable.rating.name %>
+          </div>
+          
+        <% else %>
+          <%= link_to "Rate it!", new_rating_path(ratable_id: ratable.id, ratable_type: ratable.class.name)  %>
+        <% end %>
+        
+      </h4>

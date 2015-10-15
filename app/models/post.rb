@@ -2,6 +2,10 @@ class Post < ActiveRecord::Base
    belongs_to :topic
    belongs_to :user
    has_many :comments, dependent: :destroy
+   has_many :labelings, as: :labelable
+   has_many :labels, through: :labelings
+   #has_many :rate, as: :ratable
+   has_one :rating, as: :ratable
    
   default_scope { order('created_at DESC') }
    
@@ -19,5 +23,8 @@ scope :ordered_by_title, -> { unscoped.order('title ASC')}
 scope :ordered_by_reverse_created_at, -> { unscoped.order('created_at ASC')}
    
 
+def name
+   title
+end
    
 end

@@ -34,13 +34,19 @@ class TopicsController < ApplicationController
      @topic = Topic.find(params[:id])
    end
    
+   
    def update
      @topic = Topic.find(params[:id])
  
      @topic.assign_attributes(topic_params)
  
      if @topic.save
-        flash[:notice] = "Topic was updated."
+       @topic.labels = Label.update_labels(params[:topic][:labels])
+       # @topic.ratings = Rating.update_ratings(params[:topic][:ratings])
+       
+      
+       flash[:notice] = "Topic was updated."
+     
        redirect_to @topic
      else
        flash[:error] = "Error saving topic. Please try again."

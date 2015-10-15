@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006034345) do
+ActiveRecord::Schema.define(version: 20151013144807) do
 
   create_table "advertisements", force: :cascade do |t|
     t.string   "title"
@@ -41,6 +41,31 @@ ActiveRecord::Schema.define(version: 20151006034345) do
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
+  create_table "labelings", force: :cascade do |t|
+    t.integer  "label_id"
+    t.integer  "topic_id"
+    t.integer  "post_id"
+    t.integer  "labelable_id"
+    t.string   "labelable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
+  add_index "labelings", ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
+  add_index "labelings", ["post_id"], name: "index_labelings_on_post_id"
+  add_index "labelings", ["topic_id"], name: "index_labelings_on_topic_id"
+
+  create_table "labels", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "labelable_id"
+    t.string   "labelable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "labels", ["labelable_type", "labelable_id"], name: "index_labels_on_labelable_type_and_labelable_id"
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -60,6 +85,31 @@ ActiveRecord::Schema.define(version: 20151006034345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "rate", force: :cascade do |t|
+    t.integer  "rating_id"
+    t.integer  "topic_id"
+    t.integer  "post_id"
+    t.integer  "ratable_id"
+    t.string   "ratable_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "rate", ["post_id"], name: "index_rate_on_post_id"
+  add_index "rate", ["ratable_type", "ratable_id"], name: "index_rate_on_ratable_type_and_ratable_id"
+  add_index "rate", ["rating_id"], name: "index_rate_on_rating_id"
+  add_index "rate", ["topic_id"], name: "index_rate_on_topic_id"
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "name"
+    t.integer  "ratable_id"
+    t.string   "ratable_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "ratings", ["ratable_type", "ratable_id"], name: "index_ratings_on_ratable_type_and_ratable_id"
 
   create_table "sponsored_posts", force: :cascade do |t|
     t.string   "title"

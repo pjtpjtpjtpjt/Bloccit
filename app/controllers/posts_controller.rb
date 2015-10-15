@@ -13,18 +13,22 @@ before_action :authorize_user, except: [:show, :new, :create, :edit]
       @topic = Topic.find(params[:topic_id])
     @post = Post.new
   end
+  
 
   def edit
     @post = Post.find(params[:id])
   end
   
+  
+  
   def create
-    
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.build(post_params)
     @post.user = current_user
 
      if @post.save
+         @post.labels = Label.update_labels(params[:post][:labels])
+          # @post.ratings = Rating.update_ratings(params[:post][:ratings])
        flash[:notice] = "Post was saved."
        redirect_to [@topic, @post]
      else
@@ -39,6 +43,8 @@ before_action :authorize_user, except: [:show, :new, :create, :edit]
      @post.assign_attributes(post_params)
  
      if @post.save
+         @post.labels = Label.update_labels(params[:post][:labels])
+          # @post.ratings = Rating.update_ratings(params[:post][:ratings])
        flash[:notice] = "Post was updated."
        redirect_to [@post.topic, @post]
      else

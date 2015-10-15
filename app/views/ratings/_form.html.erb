@@ -1,0 +1,15 @@
+<!--<div class="form-group">-->
+
+<h2>Rate <%= @rating.ratable.name %></h2>
+
+<!--<#%= f.ratings :ratings %>-->
+<%= form_for @rating do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.hidden_field :ratable_id %>
+  <%= f.hidden_field :ratable_type %>
+  <%= f.submit "Save", class: "btn btn-success" %>
+<% end %>
+
+  
+<!--</div>-->

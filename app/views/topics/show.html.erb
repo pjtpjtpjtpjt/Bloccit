@@ -1,5 +1,6 @@
  <h1><%= @topic.name %></h1>
  
+ 
  <% if user_is_authorized_for_topics? %>
  <%= link_to "Delete Topic", @topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
  <% end %>
@@ -10,20 +11,30 @@
  <% end %>
  
 
-
-     
   <div class="row">
-    <div class="col-md-8">
-      <div>
-       <h3>Posts</h3>
-   
-       <%= render @topic.posts %>
-     
+   <div class="col-md-8">
+  
+     <p class="lead">
+       <%= render partial: "labels/list", locals: { labels: @topic.labels } %>
+        <%= render partial: "ratings/rating", locals: {ratable: @topic} %>
+       <br />
+       <%= @topic.description %>
+     </p>
+     <% @topic.posts.each do |post| %>
+       <div class="media">
+         <!--<#%= render partial: 'votes/voter', locals: { post: post } %>-->
+         <div class="media-body">
+           <h4 class="media-heading">
+             <%= link_to post.title, topic_post_path(@topic, post) %>
+             <%= render partial: "labels/list", locals: { labels: post.labels } %>
+            
+              <!--<#%= render @topic.posts %>-->
+             
+            <% end %>
+           </h4>
+      
+            </div>
       </div>
-    </div>
-  </div>
-  
-  
 
 
 
@@ -44,12 +55,13 @@
          </div>
        </div>
      <% end %>
+    </div>
    </div>
    
   
     
     <div><%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %></div>
     <div><%= link_to "New Sponsored Post", new_topic_sponsored_post_path(@topic), class: 'btn btn-success' %></div>
+
  
-   </div>
- </div>
+ 

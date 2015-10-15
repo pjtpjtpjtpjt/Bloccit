@@ -60,7 +60,8 @@ include RandomData
   
   title: RandomData.random_sentence,
   body:  RandomData.random_paragraph,
-  price: RandomData.random_price
+  price: RandomData.random_price, 
+  topic: topics.sample
   )
  end
  
