@@ -4,12 +4,14 @@ class Post < ActiveRecord::Base
    has_many :comments, dependent: :destroy
    
    has_many :votes, dependent: :destroy
+   has_many :favorites, dependent: :destroy
    has_many :labelings, as: :labelable
    has_many :labels, through: :labelings
   
    has_one :rating, as: :ratable
    
    after_create :update_vote
+   after_create :create_favorite
    
    
   default_scope { order('rank DESC') }
@@ -55,6 +57,13 @@ private
 
 def update_vote
     self.votes.create(value: 1)
+end
+
+
+def create_favorite
+    self.favorites.create(user: user)
+   
+    FavoriteMailer.new_post(user, self).deliver_now
 end
 
    

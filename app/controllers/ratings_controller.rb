@@ -1,6 +1,8 @@
 class RatingsController < ApplicationController
     
 
+before_action :require_sign_in
+
     def show
     @rating = Rating.find(params[:id])
     end

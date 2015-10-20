@@ -28,7 +28,7 @@ before_action :authorize_user, except: [:show, :new, :create, :edit]
 
      if @post.save
          @post.labels = Label.update_labels(params[:post][:labels])
-          # @post.ratings = Rating.update_ratings(params[:post][:ratings])
+        
        flash[:notice] = "Post was saved."
        redirect_to [@topic, @post]
      else
@@ -44,7 +44,7 @@ before_action :authorize_user, except: [:show, :new, :create, :edit]
  
      if @post.save
          @post.labels = Label.update_labels(params[:post][:labels])
-          # @post.ratings = Rating.update_ratings(params[:post][:ratings])
+         
        flash[:notice] = "Post was updated."
        redirect_to [@post.topic, @post]
      else
@@ -69,13 +69,14 @@ before_action :authorize_user, except: [:show, :new, :create, :edit]
   
   
   
+  
   # remember to add private methods to the bottom of the file. Any method defined below private, will be private.
    private
  
+  
    def post_params
      params.require(:post).permit(:title, :body)
    end
-  
   
     def authorize_user
      post = Post.find(params[:id])
