@@ -4,7 +4,7 @@ resources :ratings, only: [:show, :new, :create]
 resources :labels, only: [:show]
 
 resources :advertisements, :questions
-resources :users, only: [:new, :create]
+resources :users, only: [:new, :create, :show]
 resources :sessions, only: [:new, :create, :destroy]
 
 resources :topics do
@@ -24,6 +24,8 @@ end
 post 'users/confirm' => 'users#confirm'
 
 get 'about' => 'welcome#about'
+
+get 'faq' => 'welcome#faq'
   
 root to: 'welcome#index'
   
