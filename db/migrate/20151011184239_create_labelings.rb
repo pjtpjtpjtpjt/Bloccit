@@ -11,6 +11,7 @@ class CreateLabelings < ActiveRecord::Migration
  
        t.timestamps null: false
      end
+        
      add_foreign_key :labelings, :labels
      add_foreign_key :labelings, :topics
      add_foreign_key :labelings, :posts
