@@ -6,7 +6,7 @@ before_action :authorize_user, except: [:show, :new, :create, :edit]
 
   def show
     @post = Post.find(params[:id])
-  
+
   end
 
   def new
@@ -51,6 +51,8 @@ before_action :authorize_user, except: [:show, :new, :create, :edit]
        flash[:error] = "There was an error saving the post. Please try again."
        render :edit
      end
+     
+  
    end
    
    
