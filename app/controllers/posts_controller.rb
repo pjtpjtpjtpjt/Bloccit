@@ -6,7 +6,7 @@ before_action :authorize_user, except: [:show, :new, :create, :edit]
 
   def show
     @post = Post.find(params[:id])
-
+    
   end
 
   def new
