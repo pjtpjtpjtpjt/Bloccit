@@ -2,18 +2,30 @@ class VotesController < ApplicationController
     
     before_action :require_sign_in
  
+
+ 
     def up_vote
      update_vote(1)
-     redirect_to :back
+     # respond_to do |format|
+     #   format.html { redirect_to :back }
+     #   format.js
+     # end
     end
      
      def down_vote
-     update_vote(-1)
-     redirect_to :back
+      update_vote(-1)
+      # respond_to do |format|
+      #   format.html { redirect_to :back }
+      #   format.js
+      # end
      end
  
+  
+ 
    private  
+   
    def update_vote(new_value)
+    
      @post = Post.find(params[:post_id])
      @vote = @post.votes.where(user_id: current_user.id).first
  
@@ -22,8 +34,11 @@ class VotesController < ApplicationController
      else
        @vote = current_user.votes.create(value: new_value, post: @post)
      end
+      
    end
-     
+
+  
+
 
 end
 
