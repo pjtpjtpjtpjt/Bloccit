@@ -32,10 +32,17 @@ root to: 'welcome#index'
   
   namespace :api do
      namespace :v1 do
-       resources :users, only: [:index, :show]
-       resources :topics, only: [:index, :show]
-       resources :posts, only: [:show]
+   
+       resources :users, only: [:index, :show, :create, :update]
+       
+       resources :topics do
+           resources :topics, except: [:edit, :new]
+           resources :posts, only: [:create]
+       end
+       
+       resources :posts, only: [:update, :destroy, :new, :show]
        resources :comments, only: [:show]
+      
       end
    end
 
