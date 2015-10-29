@@ -174,4 +174,12 @@ it { should have_many(:favorites) }
     end
 
 
+ describe "#generate_auth_token" do
+     it "creates a token" do
+       expect(user.auth_token).to_not be_nil
+     end
+   end
+
+
+
 end
