@@ -6,8 +6,7 @@
  
    def show
      @post = Post.find(params[:id])
-     render json: @post.to_json, status: 200
-     comments = @post.comments
+     render json: @post.to_json.include([:comments, :favorites, :votes]), status: 200
    end
    
    
