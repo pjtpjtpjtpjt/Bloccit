@@ -2,6 +2,7 @@
 
    before_filter :authenticate_user, except: [:index, :show]
    before_filter :authorize_user, except: [:index, :show]
+   
  
    def index
      topics = Topic.all
@@ -11,7 +12,8 @@
 
    def show
      @topic = Topic.find(params[:id])
-     render json: @topic.to_json.include([:posts]), status: 200
+     render json: @topic.to_json(include: [:posts]), status: 200
+    
    end
    
    

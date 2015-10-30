@@ -35,12 +35,13 @@ root to: 'welcome#index'
    
        resources :users, only: [:index, :show, :create, :update]
        
+       
        resources :topics do
            resources :topics, except: [:edit, :new]
            resources :posts, only: [:create]
        end
        
-       resources :posts, only: [:update, :destroy, :new, :show]
+       resources :posts, only: [:update, :destroy, :show]
        resources :comments, only: [:show]
       
       end
