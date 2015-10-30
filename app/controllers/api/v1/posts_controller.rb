@@ -6,7 +6,7 @@
  
    def show
      @post = Post.find(params[:id])
-     render json: @post.to_json.include([:comments, :favorites, :votes]), status: 200
+     render json: @post.to_json(include: [:comments, :votes, :favorites]), status: 200
    end
    
    
@@ -23,8 +23,9 @@
    
    
    def create
-    post = Post.new(post_params)
- 
+    @topic = Topic.find(params[:topic_id])
+    post = @topic.posts.build(post_params)
+    
      if post.valid?
        post.save!
        render json: post.to_json, status: 201
@@ -48,7 +49,7 @@
    private
    
     def post_params
-     params.require(:post).permit(:body, :description)
+     params.require(:post).permit(:title, :body)
     end
    
    

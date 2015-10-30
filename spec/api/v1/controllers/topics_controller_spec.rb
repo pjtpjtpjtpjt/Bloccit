@@ -3,6 +3,7 @@ require 'rails_helper'
  RSpec.describe Api::V1::TopicsController, type: :controller do
    let(:my_user) { create(:user) }
    let(:my_topic) { create(:topic) }
+   
  
 
    context "unauthenticated user" do
@@ -97,6 +98,8 @@ require 'rails_helper'
           expect(updated_topic.to_json).to eq response.body
         end
      end
+     
+     
      
      
       describe "POST create" do
